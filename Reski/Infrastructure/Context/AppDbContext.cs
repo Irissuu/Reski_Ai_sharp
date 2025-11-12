@@ -1,4 +1,5 @@
-﻿using Reski.Domain.Entity;
+﻿using Microsoft.EntityFrameworkCore;
+using Reski.Domain.Entity;
 using Reski.Infrastructure.Mapping;
 
 namespace Reski.Infrastructure.Context;

@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Asp.Versioning;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Reski.Application.DTO.Hateoas;
 using Reski.Application.DTO.Request;
 using Reski.Application.DTO.Response;
 using Reski.Domain.Entity;
 using Reski.Infrastructure.Context;
+using Swashbuckle.AspNetCore.Annotations;
 
-namespace Reski.Controller;
+namespace Reski.Controller
 
 {
     /// <summary>Endpoints para gerenciamento de usuários.</summary>
