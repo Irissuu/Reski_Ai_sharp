@@ -1,0 +1,6 @@
+@Reski_HostAddress = http://localhost:5179
+
+GET {{Reski_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
