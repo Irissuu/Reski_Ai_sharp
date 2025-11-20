@@ -12,17 +12,20 @@
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.10"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="9.0.0" />
         <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions" Version="9.0.0" />
         <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="9.0.0" />
+        <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="8.14.0" />
         <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.14.0" />
+        <PackageReference Include="Microsoft.ML" Version="5.0.0" />
+        <PackageReference Include="Microsoft.ML.DataView" Version="5.0.0" />
         <PackageReference Include="Oracle.EntityFrameworkCore" Version="9.23.26000" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.4" />
         <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="8.1.2" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Domain\ValueObject\" />
     </ItemGroup>
 
 </Project>

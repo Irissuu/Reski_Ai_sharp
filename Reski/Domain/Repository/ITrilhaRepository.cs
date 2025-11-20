@@ -1,6 +1,9 @@
-﻿namespace Reski.Domain.Repository;
+﻿using Reski.Domain.Entity;
 
-public class ITrilhaRepository
+namespace Reski.Domain.Repository;
+
+public interface ITrilhaRepository
 {
-    
+    Task<Trilha?> GetByIdAsync(int id, CancellationToken ct = default);
+    Task AddAsync(Trilha trilha, CancellationToken ct = default);
 }

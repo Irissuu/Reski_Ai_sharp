@@ -9,6 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Reski.Application.Service;
 using Reski.Infrastructure.Context;
+using Reski.Application.ML;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseOracle(builder.Configuration.GetConnectionString("OracleDB"))
 );
 
+builder.Services.AddSingleton<IRecomendacaoTrilha, RecomendacaoTrilha>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 
 builder.Services.AddControllers();
@@ -30,7 +32,7 @@ builder.Services
     })
     .AddApiExplorer(o =>
     {
-        o.GroupNameFormat = "'v'VVV";  
+        o.GroupNameFormat = "'v'VVV";
         o.SubstituteApiVersionInUrl = true;
     });
 
@@ -38,11 +40,8 @@ builder.Services.AddHealthChecks()
     .AddCheck("self", () => HealthCheckResult.Healthy(), tags: new[] { "live" })
     .AddDbContextCheck<AppDbContext>("db", tags: new[] { "ready" });
 
-var jwtKey =
-    builder.Configuration["Jwt:Key"]
-    ?? Environment.GetEnvironmentVariable("JWT__KEY")
-    ?? Environment.GetEnvironmentVariable("JWT_SECRET_KEY");
 
+var jwtKey      = builder.Configuration["Jwt:Key"];
 var jwtIssuer   = builder.Configuration["Jwt:Issuer"];
 var jwtAudience = builder.Configuration["Jwt:Audience"];
 
@@ -59,10 +58,21 @@ builder.Services
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = jwtIssuer,
-            ValidAudience = jwtAudience,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey)),
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!)
+            ),
             ClockSkew = TimeSpan.FromMinutes(1)
+        };
+
+        options.Events = new JwtBearerEvents
+        {
+            OnAuthenticationFailed = context =>
+            {
+                Console.WriteLine("JWT ERROR: " + context.Exception.Message);
+                return Task.CompletedTask;
+            }
         };
     });
 
@@ -76,20 +86,24 @@ builder.Services.AddSwaggerGen(opt =>
     var security = new OpenApiSecurityScheme
     {
         Name = "Authorization",
-        Description = "Bearer {token}",
+        Description = "", 
         In = ParameterLocation.Header,
         Type = SecuritySchemeType.Http,
         Scheme = "bearer",
         BearerFormat = "JWT",
         Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" }
     };
+
     opt.AddSecurityDefinition("Bearer", security);
-    opt.AddSecurityRequirement(new OpenApiSecurityRequirement { { security, Array.Empty<string>() } });
+    opt.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        { security, Array.Empty<string>() }
+    });
 
-    opt.SwaggerDoc("v1", new OpenApiInfo { Title = "Elysia API", Version = "v1", Description = "API Elysia - v1" });
-    opt.SwaggerDoc("v2", new OpenApiInfo { Title = "Elysia API", Version = "v2", Description = "API Elysia - v2" });
+    opt.SwaggerDoc("v1", new OpenApiInfo { Title = "Reski API", Version = "v1", Description = "API Reski - v1" });
+    opt.SwaggerDoc("v2", new OpenApiInfo { Title = "Reski API", Version = "v2", Description = "API Reski - v2" });
 
-    var xml = Path.Combine(AppContext.BaseDirectory, "ElysiaAPI.xml");
+    var xml = Path.Combine(AppContext.BaseDirectory, "ReskiAPI.xml");
     if (File.Exists(xml))
         opt.IncludeXmlComments(xml, includeControllerXmlComments: true);
 });
@@ -101,8 +115,8 @@ app.UseSwagger(c =>
     c.RouteTemplate = "swagger/{documentName}/swagger.json";
     c.PreSerializeFilters.Add((doc, req) =>
     {
-        var scheme   = req.Headers["X-Forwarded-Proto"].FirstOrDefault() ?? req.Scheme;
-        var host     = req.Headers["X-Forwarded-Host"].FirstOrDefault()  ?? req.Host.Value;
+        var scheme = req.Headers["X-Forwarded-Proto"].FirstOrDefault() ?? req.Scheme;
+        var host = req.Headers["X-Forwarded-Host"].FirstOrDefault() ?? req.Host.Value;
         var basePath = req.PathBase.HasValue ? req.PathBase.Value : string.Empty;
         doc.Servers = new List<OpenApiServer> { new() { Url = $"{scheme}://{host}{basePath}" } };
     });
@@ -110,13 +124,12 @@ app.UseSwagger(c =>
 
 app.UseSwaggerUI(opt =>
 {
-    opt.SwaggerEndpoint("/swagger/v1/swagger.json", "Elysia API v1");
-    opt.SwaggerEndpoint("/swagger/v2/swagger.json", "Elysia API v2");
+    opt.SwaggerEndpoint("/swagger/v1/swagger.json", "Reski API v1");
+    opt.SwaggerEndpoint("/swagger/v2/swagger.json", "Reski API v2");
     opt.RoutePrefix = "swagger";
 });
 
 app.UseHttpsRedirection();
-
 app.UseAuthentication();
 app.UseAuthorization();
 

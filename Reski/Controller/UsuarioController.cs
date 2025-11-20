@@ -91,21 +91,23 @@ namespace Reski.Controller
             }
         }
 
-        /// <summary>Atualiza um usuário existente.</summary>
+        /// <summary>Atualiza um usuário existente.</summary> 
         [SwaggerOperation(Summary = "Atualiza um usuário existente")]
         [HttpPut("{id:int}", Name = nameof(UpdateUsuario))]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         [ProducesResponseType(409)]
-        public async Task<IActionResult> UpdateUsuario(int id, [FromBody] UsuarioRequest request)
+        public async Task<IActionResult> UpdateUsuario(
+            int id,
+            [FromBody] UsuarioUpdateRequest request)   
         {
             var usuario = await _context.Usuarios.FindAsync(id);
             if (usuario == null) return NotFound();
 
             try
             {
-                usuario.AtualizarDadosBasicos(request.Nome, request.Email, request.Cpf);
+                usuario.AtualizarDadosBasicos(request.Nome, request.Email, usuario.Cpf);
 
                 if (!string.IsNullOrWhiteSpace(request.Senha))
                     usuario.DefinirSenha(request.Senha);
@@ -113,13 +115,19 @@ namespace Reski.Controller
                 await _context.SaveChangesAsync();
                 return NoContent();
             }
-            catch (ArgumentException ex)         { return BadRequest(ex.Message); }
-            catch (InvalidOperationException ex) { return BadRequest(ex.Message); }
+            catch (ArgumentException ex)
+            { 
+                return BadRequest(ex.Message); 
+            }
+            catch (InvalidOperationException ex) 
+            { 
+                return BadRequest(ex.Message); 
+            }
             catch (DbUpdateException ex) when (
                 (ex.InnerException?.Message?.Contains("ORA-00001") ?? false) ||
                 (ex.InnerException?.Message?.Contains("UNIQUE", StringComparison.OrdinalIgnoreCase) ?? false))
             {
-                return Conflict("Email ou CPF já cadastrados.");
+                return Conflict("Email já cadastrado."); 
             }
         }
 

@@ -1,6 +1,9 @@
-﻿namespace Reski.Domain.Repository;
+﻿using Reski.Domain.Entity;
 
-public class IObjetivoRepository
+namespace Reski.Domain.Repository;
+
+public interface IObjetivoRepository
 {
-    
+    Task<Objetivo?> GetByIdAsync(int id, CancellationToken ct = default);
+    Task AddAsync(Objetivo objetivo, CancellationToken ct = default);
 }

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ReskiTests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a2403021d100b762bf344306521705f09cb95309")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8826bf2dde2ca3cd73aebcdaf173059a4aeb5336")]
 [assembly: System.Reflection.AssemblyProductAttribute("ReskiTests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ReskiTests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
