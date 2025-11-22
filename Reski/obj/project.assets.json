@@ -4876,6 +4876,7 @@
       "Microsoft.ML >= 5.0.0",
       "Microsoft.ML.DataView >= 5.0.0",
       "Oracle.EntityFrameworkCore >= 9.23.26000",
+      "Oracle.ManagedDataAccess.Core >= 23.26.0",
       "Swashbuckle.AspNetCore >= 8.1.4",
       "Swashbuckle.AspNetCore.Annotations >= 8.1.2"
     ]
@@ -4987,6 +4988,10 @@
           "Oracle.EntityFrameworkCore": {
             "target": "Package",
             "version": "[9.23.26000, )"
+          },
+          "Oracle.ManagedDataAccess.Core": {
+            "target": "Package",
+            "version": "[23.26.0, )"
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",

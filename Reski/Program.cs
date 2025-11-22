@@ -14,7 +14,7 @@ using Reski.Application.ML;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseOracle(builder.Configuration.GetConnectionString("OracleDB"))
+    options.UseOracle(builder.Configuration.GetConnectionString("Oracle"))
 );
 
 builder.Services.AddSingleton<IRecomendacaoTrilha, RecomendacaoTrilha>();
