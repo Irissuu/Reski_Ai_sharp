@@ -128,8 +128,10 @@ dotnet run
 | DELETE | /api/v1/trilhas/{id}              | Remove uma trilha            |
 
 ---
+
 ### ⚠️ Instruções para testar o swagger
 Ao realizar o POST de usuário em seguida realize o AUTH utilizando o email e a senha cadastradas, copie o Token sem aspas e outras escritas além dele. 
+
 ---
 
 ## 📧 Testes Swagger 
@@ -234,6 +236,7 @@ Ao realizar o POST de usuário em seguida realize o AUTH utilizando o email e a 
 ```
 
 ---
+
 ## 📧 Testes xUnit
 
 ### 1. Entre na pasta de testes
