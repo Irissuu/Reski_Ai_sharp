@@ -48,7 +48,7 @@ http://localhost:5179/swagger/index.html
 
 ### 1. Clone o repositório
 ```text
-git clone 
+git clone https://github.com/Irissuu/Reski_Ai_sharp.git
 ```
 
 ### 2. Restaure dependências
