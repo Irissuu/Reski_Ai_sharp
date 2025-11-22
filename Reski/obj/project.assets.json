@@ -4888,11 +4888,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Usuario\\Documents\\Reski\\Reski\\Reski.csproj",
+      "projectUniqueName": "C:\\Users\\Usuario\\Documents\\2º Ano\\Global Final\\Reski\\Reski\\Reski.csproj",
       "projectName": "Reski",
-      "projectPath": "C:\\Users\\Usuario\\Documents\\Reski\\Reski\\Reski.csproj",
+      "projectPath": "C:\\Users\\Usuario\\Documents\\2º Ano\\Global Final\\Reski\\Reski\\Reski.csproj",
       "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Usuario\\Documents\\Reski\\Reski\\obj\\",
+      "outputPath": "C:\\Users\\Usuario\\Documents\\2º Ano\\Global Final\\Reski\\Reski\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

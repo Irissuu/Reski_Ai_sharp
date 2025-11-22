@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "COeLkJ/F4rQ=",
+  "dgSpecHash": "71JfFFrghLM=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Usuario\\Documents\\Reski\\Reski\\Reski.csproj",
+  "projectFilePath": "C:\\Users\\Usuario\\Documents\\2º Ano\\Global Final\\Reski\\Reski\\Reski.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Usuario\\.nuget\\packages\\asp.versioning.abstractions\\8.1.0\\asp.versioning.abstractions.8.1.0.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\asp.versioning.http\\8.1.0\\asp.versioning.http.8.1.0.nupkg.sha512",
