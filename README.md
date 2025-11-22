@@ -151,7 +151,7 @@ Ao realizar o POST de usuário em seguida realize o AUTH utilizando o email e a 
 ```text
 {
   "email": "jujualmei@gmail.com",
-  "senha": "rmctraiblazer"
+  "senha": "RmcTraiblazer"
 }
 ```
 
